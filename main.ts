@@ -68,13 +68,14 @@ function run(p,g){
   }
  }
 }
+const I=process.env.MAKEFUN_INPUT_DIR??"/input",O2=process.env.MAKEFUN_OUTPUT_DIR??"/output";
 for(let n=1;n<=40;n++){
  const d="i"+String(n).padStart(3,"0");
  let p,g;
- try{p=R("/input/"+d+"/program.bin")}catch{p=Buffer.alloc(0)}
- try{g=R("/input/"+d+"/input.bin")}catch{g=Buffer.alloc(0)}
+ try{p=R(I+"/"+d+"/program.bin")}catch{p=Buffer.alloc(0)}
+ try{g=R(I+"/"+d+"/input.bin")}catch{g=Buffer.alloc(0)}
  const{o,e}=run(p,g);
- M("/output/"+d,{recursive:true});
- W("/output/"+d+"/stdout.bin",o);
- W("/output/"+d+"/exit.txt",e+"\n");
+ M(O2+"/"+d,{recursive:true});
+ W(O2+"/"+d+"/stdout.bin",o);
+ W(O2+"/"+d+"/exit.txt",e+"\n");
 }
